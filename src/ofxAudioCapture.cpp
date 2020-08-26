@@ -7,7 +7,7 @@
 /**
     Print a list of all available audio devices (using RtAudio api)
  */
-static void ofxAudioCapture::printDeviceList()
+void ofxAudioCapture::printDeviceList()
 {
 	ofSoundStream soundstream;
 
@@ -74,7 +74,7 @@ bool ofxAudioCapture::setupAudioInputRecorder( const ofSoundStreamSettings& sett
 
     Add frames by calling ofxAudioCapture::audioIn( ofSoundBuffer& buffer ).
  */
-bool ofxAudioCapture::setupManualRecorder( int numInputChannels, int sampleRate = 48000, int bitsPerSample = 16 )
+bool ofxAudioCapture::setupManualRecorder( int numInputChannels, int sampleRate, int bitsPerSample )
 {
 	m_wavWriter.setFormat( numInputChannels, sampleRate, bitsPerSample );
 	m_mode = Mode::READY;
@@ -142,7 +142,7 @@ void ofxAudioCapture::audioIn( float* buffer, size_t size )
 	// recording
 	if ( m_mode == Mode::RECORDING ) {
 
-		if ( buffer.size() ) {
+		if ( buffer.size() ) { /// TODO: E0153 expression must have a class type
 			if ( !m_wavWriter.write( buffer, size ) ) {
 				// unable to write
 				ofLogError( "AudioCapture" ) << __FUNCTION__ << ": Unable to write audio to " << m_wavFile << "!";
