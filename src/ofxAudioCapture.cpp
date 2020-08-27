@@ -142,8 +142,7 @@ void ofxAudioCapture::audioIn( float* buffer, size_t size )
 	// recording
 	if ( m_mode == Mode::RECORDING ) {
 
-		//if(buffer.size()){
-		if ( buffer ) { /// TODO: E0153 expression "buffer" must have a class type -- fixed? test
+		if ( buffer && size ) {
 			if ( !m_wavWriter.write( buffer, size ) ) {
 				// unable to write
 				ofLogError( "AudioCapture" ) << __FUNCTION__ << ": Unable to write audio to " << m_wavFile << "!";
