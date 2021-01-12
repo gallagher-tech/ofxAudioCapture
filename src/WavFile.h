@@ -154,6 +154,8 @@ public:
 			buff[i] = round(samples[i] * 32760.f);
 		}
 
+		if (file == NULL) { return false; }
+
 		file->write((char*)buff, buffLength * sizeof(short));
 		length += buffLength;
 
